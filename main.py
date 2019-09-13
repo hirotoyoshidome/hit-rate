@@ -14,6 +14,14 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 # consts
 JUDGEMENT = 'hit'
 HEADER_TARGET_ITEM = 'X-Cache'
+ALLOWED_EXTENSIONS = ['js', 'png', 'jpg', 'css', 'gif', 'jpeg', 'html', 'htm']
+
+# function definition
+def check_exteensions(content):
+  for ext in ALLOWED_EXTENSIONS:
+    if ext in content:
+      return False
+  return True
 
 current_dir = str(subprocess.check_output(['pwd'])).replace('b\'', '').replace('\\n\'', '')
 os.environ['PATH'] = os.environ.get('PATH') + ':' + current_dir
@@ -49,6 +57,7 @@ driver.quit()
 
 total_count = len(contents_url)
 hit_count = 0
+exclusion_count = 0
 non_cached_resources = []
 
 for content in contents_url:
@@ -59,13 +68,16 @@ for content in contents_url:
 
   if JUDGEMENT in val.lower():
     hit_count = hit_count + 1
+  elif check_exteensions(content):
+    exclusion_count = exclusion_count + 1
   else:
     non_cached_resources.append(content)
 
-hit_percentage = (hit_count / total_count * 100)
+# post processing
+hit_percentage = (hit_count / (total_count - exclusion_count) * 100)
 
 # output
-print('total hit count : ' + str(total_count))
+print('total hit count : ' + str(total_count - exclusion_count))
 print('hit percentage  : ' + str(hit_percentage))
 print('###non cached resources###')
 for c in non_cached_resources:
