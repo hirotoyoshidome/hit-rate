@@ -4,14 +4,13 @@ import json
 import sys
 import requests
 
+import selenium
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-# python3 main.py https://store.bshop-inc.com/
+# python3 main.py https://google.com/
 # TODO
-# ソースをきれいにする
 # 算出方法精査(現段階では7割くらいのキャッシュ率)⇒おそらく画像以外のパスもトータルに入っているため、低い
-# 拡張子で分けるようにする
 
 # consts
 JUDGEMENT = 'hit'
@@ -23,11 +22,15 @@ os.environ['PATH'] = os.environ.get('PATH') + ':' + current_dir
 caps = DesiredCapabilities.CHROME
 caps['loggingPrefs'] = {'performance': 'ALL'}
 
+# ブラウザを開かないと画像のパスが読み込まれなかったため、コメントアウト
+# opt = selenium.webdriver.ChromeOptions()
+# opt.add_argument('--blink-settings=imagesEnabled=false')
+
 url = sys.argv[1]
 
 contents_url = []
 
-driver = webdriver.Chrome(desired_capabilities=caps)
+driver = webdriver.Chrome(desired_capabilities=caps) # , chrome_options=opt
 driver.get(url)
 
 for entry in driver.get_log('performance'):
@@ -39,10 +42,11 @@ for entry in driver.get_log('performance'):
 driver.quit()
 
 # # verify
-# print("start verify")
+# # コメントアウト外して、
+# # python3 main.py https:google.com > result.txt
+# # で対象のリソースの確認ができます
 # for x in contents_url:
 #     print(x)
-# print("end verify")
 
 total_count = len(contents_url)
 hit_count = 0
