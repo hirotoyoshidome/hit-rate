@@ -32,3 +32,11 @@ python3 main.py https://google.com/
 
 でヒット率の確認ができます。
 
+
+### サンプル実行
+
+```
+$ python3 main.py https://repetto.jp/
+total hit count : 164
+hit percentage  : 49.390243902439025
+```
