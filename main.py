@@ -29,7 +29,7 @@ os.environ['PATH'] = os.environ.get('PATH') + ':' + current_dir
 caps = DesiredCapabilities.CHROME
 caps['loggingPrefs'] = {'performance': 'ALL'}
 
-# ブラウザを開かないと画像のパスが読み込まれなかったため、コメントアウト
+## comment out because it did not work without opening a browser
 # opt = selenium.webdriver.ChromeOptions()
 # opt.add_argument('--blink-settings=imagesEnabled=false')
 
@@ -48,10 +48,9 @@ for entry in driver.get_log('performance'):
     contents_url.append(response_info.get('url'))
 driver.quit()
 
-# # verify
-# # コメントアウト外して、
-# # python3 main.py https:google.com > result.txt
-# # で対象のリソースの確認ができます
+## verify
+## if you want to check all static resources, please add this comments .
+## python3 main.py https:google.com > result.txt
 # for x in contents_url:
 #   print(x)
 
@@ -79,6 +78,8 @@ hit_percentage = (hit_count / (total_count - exclusion_count) * 100)
 # output
 print('total hit count : ' + str(total_count - exclusion_count))
 print('hit percentage  : ' + str(hit_percentage))
-print('###non cached resources###')
-for c in non_cached_resources:
-  print(c)
+
+## if you want to check non cached resources, please add this comments .
+# print('###non cached resources###')
+# for c in non_cached_resources:
+#   print(c)
