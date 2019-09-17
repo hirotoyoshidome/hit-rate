@@ -10,11 +10,8 @@ docker run --rm cache_hit_rate_tool:latest https://google.com/
 ```
 
 dockerでうまく行かない場合は、
-
 解凍したものをmain.pyと同ディレクトリに配置
-(私の環境で適用したものを配置しておく)
 ※　importで対応できなかったため
-
 http://chromedriver.chromium.org/downloads
 
 ```
