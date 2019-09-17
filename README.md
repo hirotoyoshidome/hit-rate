@@ -2,28 +2,21 @@
 
 ## 使い方
 
-chromeのバージョンにあったchromedriverをダウンロードして解凍
+```
+docker build -t cache_hit_rate_tool .
+
+docker run --rm cache_hit_rate_tool:latest https://google.com/
 
 ```
-unzip xxx.zip
-```
+
+
+dockerでうまく行かない場合は、
 
 解凍したものをmain.pyと同ディレクトリに配置
 (私の環境で適用したものを配置しておく)
 ※　importで対応できなかったため
 
 http://chromedriver.chromium.org/downloads
-
-
-```
-docker build -t cache_hit_rate_tool .
-
-docker run --rm cache_hit_rate_tool:latest https:google.com/
-
-```
-
-
-dockerでうまく行かない場合は、
 
 ```
 Dockerfileでpipでインストールしているモジュールを入れて実行
@@ -34,6 +27,17 @@ python3 main.py https://google.com/
 
 
 ### サンプル実行
+Dockerのバージョン
+
+```
+$ docker run --rm cache_hit_rate_tool:latest https://repetto.jp/
+total hit count : 173
+hit percentage  : 46.82080924855491
+error count : 1
+
+```
+
+手動実行のパターン
 
 ```
 $ python3 main.py https://repetto.jp/
