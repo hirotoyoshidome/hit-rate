@@ -9,7 +9,6 @@ docker run --rm cache_hit_rate_tool:latest https://google.com/
 
 ```
 
-
 dockerでうまく行かない場合は、
 
 解凍したものをmain.pyと同ディレクトリに配置
@@ -27,7 +26,7 @@ python3 main.py https://google.com/
 
 
 ### サンプル実行
-Dockerのバージョン
+Docker実行
 
 ```
 $ docker run --rm cache_hit_rate_tool:latest https://repetto.jp/
@@ -37,7 +36,7 @@ error count : 1
 
 ```
 
-手動実行のパターン
+手動実行
 
 ```
 $ python3 main.py https://repetto.jp/
