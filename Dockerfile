@@ -1,4 +1,4 @@
-FROM python:3.6.9-alpine3.9
+FROM python:3.8.1-alpine3.11
 
 WORKDIR /usr/src
 
@@ -10,11 +10,10 @@ RUN apk update && apk upgrade --update && \
         openssl && \
     pip install \
         requests \
-        selenium && \
+        selenium==2.53.6 && \
     cp /usr/lib/chromium/chromedriver /usr/src/
+
+# バージョンが変わって動かないので、コメントアウト
 # RUN pip install chromedriver-binary
-
-COPY . .
-
-ENTRYPOINT ["python", "/usr/src/main.py"]
-
+# COPY . .
+# ENTRYPOINT ["python", "/usr/src/main.py"]

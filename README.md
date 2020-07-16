@@ -1,42 +1,21 @@
 # hit_rate
+CDNでのヒット率の確認ができます。
 
-## 使い方
+## 手順最新版(2020.07.16)
 
 ```
 docker build -t cache_hit_rate_tool .
-
-docker run --rm cache_hit_rate_tool:latest https://google.com/
-
+docker run --rm -it -d -v $(pwd):/usr/src --name cache_hit_late cache_hit_rate_tool:latest
+docker exec -it cache_hit_late sh
+python main.py https://google.com/
+docker stop cache_hit_late
 ```
-
-dockerでうまく行かない場合は、
-解凍したものをmain.pyと同ディレクトリに配置
-※　importで対応できなかったため
-http://chromedriver.chromium.org/downloads
-
-```
-Dockerfileでpipでインストールしているモジュールを入れて実行
-python3 main.py https://google.com/
-```
-
-でヒット率の確認ができます。
-
 
 ### サンプル実行
-Docker実行
 
 ```
-$ docker run --rm cache_hit_rate_tool:latest https://repetto.jp/
-total hit count : 173
-hit percentage  : 46.82080924855491
-error count : 1
-
-```
-
-手動実行
-
-```
-$ python3 main.py https://repetto.jp/
-total hit count : 164
-hit percentage  : 49.390243902439025
+$ python main.py https://repetto.jp/
+total hit count : 155
+hit percentage  : 47.74193548387097
+error count : 2
 ```
